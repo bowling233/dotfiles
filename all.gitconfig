@@ -1,9 +1,16 @@
-# git send-email configuration
+[user]
+	name = bowling233
+	email = zhubaolin228@gmail.com
+  signingkey = #
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
 [sendemail]
-  smtpServer = smtp.gmail.com
-  smtpServerPort = 587
-  smtpEncryption = tls
-  smtpUser = zhubaolin228@gmail.com
-  # smtpPass = saved to local computer
+    smtpServer = smtp.gmail.com
+    smtpServerPort = 587
+    smtpEncryption = tls
+    smtpUser = zhubaolin228@gmail.com
+    # smtpPass = PASSWORD
 [credential]
-  helper = store
+    helper = store
