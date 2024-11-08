@@ -21,7 +21,7 @@ DST=(
 )
 
 for i in ${!SRC[@]}; do
-        if [ -f ${DST[$i]} ]; then
+        if [ -e ${DST[$i]} ] && [ ! -L ${DST[$i]} ]; then
                 echo "File ${DST[$i]} exists, moving to ${DST[$i]}.bak"
                 mv ${DST[$i]} ${DST[$i]}.bak
         fi
@@ -32,3 +32,14 @@ for i in ${!SRC[@]}; do
         echo "Linking ${SRC[$i]} to ${DST[$i]}"
         ln -sf ${SRC[$i]} ${DST[$i]}
 done
+
+if [ ! -d $HOME/.oh-my-zsh ]; then
+        echo "Installing oh-my-zsh"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+git clone https://gitee.com/romkatv/powerlevel10k.git \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone https://github.com/jeffreytse/zsh-vi-mode \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-vi-mode
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
