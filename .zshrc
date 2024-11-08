@@ -1,4 +1,5 @@
 source ~/.bowlingrc
+#zmodload zsh/zprof
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -43,6 +44,8 @@ plugins+=(urltools)
 plugins+=(gitignore)
 # sc-* (systemd)
 plugins+=(systemd)
+# zoxide
+plugins+=(zoxide)
 source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -88,3 +91,5 @@ if [ -d "/opt/homebrew/opt/ruby" ]; then
   export GEM_HOME=$HOME/.gem
   export PATH=$GEM_HOME/bin:$PATH
 fi
+
+#zprof > /tmp/zprof
