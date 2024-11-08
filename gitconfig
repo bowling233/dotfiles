@@ -1,0 +1,11 @@
+[user]
+	name = bowling233
+	email = zhubaolin228@gmail.com
+[sendemail]
+    smtpServer = smtp.gmail.com
+    smtpServerPort = 587
+    smtpEncryption = tls
+    smtpUser = zhubaolin228@gmail.com
+    # smtpPass = PASSWORD
+[credential]
+    helper = store
