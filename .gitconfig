@@ -32,4 +32,6 @@
 	co = checkout
 	br = branch
 	undo = reset --soft HEAD^
+[pull]
+	rebase = true
 
