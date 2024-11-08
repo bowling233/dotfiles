@@ -16,11 +16,6 @@ zstyle ':omz:update' mode auto
 # make git status faster
 DISABLE_UNTRACKED_FILES_DIRTY="true" 
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 # git-extras gitfast git-flow git-flow-avh git-hubflow git-remote-branch
 plugins+=(git)
 # (colors)
@@ -51,11 +46,8 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
+You may need to manually set your language environment
+export LANG=en_US.UTF-8
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -72,9 +64,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-#########
-# macOS #
-#########
 # flutter
 if [ -d "$HOME/development/flutter" ]; then
   export PATH="$PATH:$HOME/development/flutter/bin"

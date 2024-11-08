@@ -9,6 +9,7 @@ SRC=(
         "$SCRIPT_DIR/.zshrc"
         "$SCRIPT_DIR/.p10k.zsh"
         "$SCRIPT_DIR/config.fish"
+        "$SCRIPT_DIR/.gitconfig"
 )
 
 DST=(
@@ -18,6 +19,7 @@ DST=(
         "$HOME/.zshrc"
         "$HOME/.p10k.zsh"
         "$HOME/.config/fish/config.fish"
+        "$HOME/.gitconfig"
 )
 
 for i in ${!SRC[@]}; do
