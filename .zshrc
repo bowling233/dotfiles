@@ -22,7 +22,6 @@ plugins+=(git)
 plugins+=(colored-man-pages colorize)
 # (misc)
 plugins+=(command-not-found copyfile copypath rand-quote)
-plugins+=(zsh-vi-mode zsh-autosuggestions)
 # e64 d64 ef64
 plugins+=(encode64)
 # cpv (progress bar, use rsync)
@@ -41,6 +40,8 @@ plugins+=(gitignore)
 plugins+=(systemd)
 # zoxide
 plugins+=(zoxide)
+# need installation
+plugins+=(zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
