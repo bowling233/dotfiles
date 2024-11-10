@@ -22,6 +22,8 @@ DST=(
         "$HOME/.gitconfig"
 )
 
+# prerequists: zoxide, tmux, curl
+
 if [ ! -e ~/.oh-my-zsh/oh-my-zsh.sh ]; then
         echo "Installing oh-my-zsh"
         sh -c "$(curl -fsSL https://install.ohmyz.sh)" "" --unattended
