@@ -7,11 +7,12 @@ if [ "$EUID" -eq 0 ]; then
         exit 1
 fi
 
-PREREQ=(
+APT_PKGS=(
         curl wget jq
         flatpak pipx
         gnome-tweaks
         fcitx5 fcitx5-chinese-addons
+        fonts-firacode fonts-noto
 )
 
 alias wget='wget -q'
@@ -29,7 +30,7 @@ GNOME_EXTS=(
         dash-to-dock@micxgx.gmail.com # https://extensions.gnome.org/extension/307/dash-to-dock/
 )
 
-sudo apt-get install -y "${PREREQ[@]}" >/dev/null
+sudo apt-get update && sudo apt-get install -y "${APT_PKGS[@]}" >/dev/null
 
 install_deb_from_url() {
         url=$1
@@ -136,23 +137,25 @@ if [[ ! -f ~/.config/autostart/org.fcitx.Fcitx5.desktop ]]; then
 fi
 
 # dicts
-tmpdir=$(mktemp -d)
-declare -A DICTS_MATCH=(
-        [felixonmars/fcitx5-pinyin-zhwiki]='endswith(".dict")'
-        [outloudvi/mw2fcitx]='endswith(".dict")'
-        [wuhgit/CustomPinyinDictionary]='endswith(".tar.gz")'
-)
-for i in "${!DICTS_MATCH[@]}"; do
-        url=$(curl --silent "https://api.github.com/repos/$i/releases/latest" | jq -r ".assets[] | select(.name|${DICTS_MATCH[$i]}) | .browser_download_url")
-        readarray -t urls <<<"$url"
-        wget -qP "$tmpdir" "${urls[-1]}"
-done
-# untar gzip file
-for i in "$tmpdir"/*.tar.gz; do
-        tar -C "$tmpdir" -xzf "$i"
-done
 if [[ ! -d ~/.local/share/fcitx5/pinyin/dictionaries ]]; then
-        mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
+        tmpdir=$(mktemp -d)
+        declare -A DICTS_MATCH=(
+                [felixonmars/fcitx5-pinyin-zhwiki]='endswith(".dict")'
+                [outloudvi/mw2fcitx]='endswith(".dict")'
+                [wuhgit/CustomPinyinDictionary]='endswith(".tar.gz")'
+        )
+        for i in "${!DICTS_MATCH[@]}"; do
+                url=$(curl --silent "https://api.github.com/repos/$i/releases/latest" | jq -r ".assets[] | select(.name|${DICTS_MATCH[$i]}) | .browser_download_url")
+                readarray -t urls <<<"$url"
+                wget -qP "$tmpdir" "${urls[-1]}"
+        done
+        # untar gzip file
+        for i in "$tmpdir"/*.tar.gz; do
+                tar -C "$tmpdir" -xzf "$i"
+        done
+        if [[ ! -d ~/.local/share/fcitx5/pinyin/dictionaries ]]; then
+                mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
+        fi
+        cp -r "$tmpdir"/*.dict ~/.local/share/fcitx5/pinyin/dictionaries/
+        rm -r "$tmpdir"
 fi
-cp -r "$tmpdir"/*.dict ~/.local/share/fcitx5/pinyin/dictionaries/
-rm -r "$tmpdir"
