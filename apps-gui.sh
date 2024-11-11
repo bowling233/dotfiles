@@ -9,10 +9,11 @@ fi
 
 APT_PKGS=(
         curl wget jq
-        flatpak pipx
+        flatpak gnome-software-plugin-flatpak pipx
         gnome-tweaks
         fcitx5 fcitx5-chinese-addons
         fonts-firacode fonts-noto
+        wireshark
 )
 
 alias wget='wget -q'
@@ -23,11 +24,14 @@ FLATPAK_PKGS=(
         net.agalwood.Motrix
         com.tencent.WeChat
         com.qq.QQmusic
+	com.termius.Termius
+        io.mpv.Mpv
 )
 
 GNOME_EXTS=(
-        kimpanel@kde.org              # https://extensions.gnome.org/extension/261/kimpanel/
-        dash-to-dock@micxgx.gmail.com # https://extensions.gnome.org/extension/307/dash-to-dock/
+        kimpanel@kde.org                # https://extensions.gnome.org/extension/261/kimpanel/
+        dash-to-dock@micxgx.gmail.com   # https://extensions.gnome.org/extension/307/dash-to-dock/
+        blur-my-shell@aunetx            # https://extensions.gnome.org/extension/3193/blur-my-shell/
 )
 
 sudo apt-get update && sudo apt-get install -y "${APT_PKGS[@]}" >/dev/null
@@ -89,6 +93,7 @@ if ! dpkg -l | grep --quiet com.alibabainc.dingtalk; then
         install_deb_from_url 'https://www.dingtalk.com/win/d/qd=linux_amd64'
 fi
 
+
 # Motrix
 #        install_deb_from_github 'agalwood/Motrix' 'amd64.deb'
 # QQ
@@ -99,6 +104,7 @@ fi
 # Flatpak #
 ###########
 
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 for i in "${FLATPAK_PKGS[@]}"; do
         if flatpak list | grep --quiet "$i"; then
                 continue
