@@ -1,5 +1,5 @@
 source ~/.bowlingrc
-#zmodload zsh/zprof
+zmodload zsh/zprof
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -14,7 +14,7 @@ zstyle ':omz:update' mode auto
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
 # make git status faster
-DISABLE_UNTRACKED_FILES_DIRTY="true" 
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # git-extras gitfast git-flow git-flow-avh git-hubflow git-remote-branch
 plugins+=(git)
@@ -43,6 +43,12 @@ plugins+=(zoxide)
 # need installation
 plugins+=(zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
+# speed up by cache per day
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -79,4 +85,4 @@ if [ -d "/opt/homebrew/opt/ruby" ]; then
   export PATH=$GEM_HOME/bin:$PATH
 fi
 
-#zprof > /tmp/zprof
+zprof > /tmp/zprof
