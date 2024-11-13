@@ -26,12 +26,14 @@ FLATPAK_PKGS=(
         com.qq.QQmusic
 	com.termius.Termius
         io.mpv.Mpv
+        io.typora.Typora
 )
 
 GNOME_EXTS=(
         kimpanel@kde.org                # https://extensions.gnome.org/extension/261/kimpanel/
         dash-to-dock@micxgx.gmail.com   # https://extensions.gnome.org/extension/307/dash-to-dock/
         blur-my-shell@aunetx            # https://extensions.gnome.org/extension/3193/blur-my-shell/
+	just-perfection-desktop@just-perfection
 )
 
 sudo apt-get update && sudo apt-get install -y "${APT_PKGS[@]}" >/dev/null
