@@ -95,6 +95,11 @@ if ! dpkg -l | grep --quiet com.alibabainc.dingtalk; then
         install_deb_from_url 'https://www.dingtalk.com/win/d/qd=linux_amd64'
 fi
 
+# Hyper
+if ! command -v hyper &>/dev/null; then
+	echo "Installing Hyper"
+	install_deb_from_github 'vercel/hyper' 'amd64.deb'
+fi
 
 # Motrix
 #        install_deb_from_github 'agalwood/Motrix' 'amd64.deb'
