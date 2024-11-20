@@ -13,7 +13,7 @@ APT_PKGS=(
         gnome-tweaks
         fcitx5 fcitx5-chinese-addons
         fonts-firacode fonts-noto
-        wireshark
+        wireshark remmina
 )
 
 alias wget='wget -q'
