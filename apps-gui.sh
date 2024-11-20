@@ -27,6 +27,7 @@ FLATPAK_PKGS=(
 	com.termius.Termius
         io.mpv.Mpv
         io.typora.Typora
+        com.wps.Office
 )
 
 GNOME_EXTS=(
@@ -93,12 +94,6 @@ fi
 if ! dpkg -l | grep --quiet com.alibabainc.dingtalk; then
         echo "Installing Dingtalk"
         install_deb_from_url 'https://www.dingtalk.com/win/d/qd=linux_amd64'
-fi
-
-# Hyper
-if ! command -v hyper &>/dev/null; then
-	echo "Installing Hyper"
-	install_deb_from_github 'vercel/hyper' 'amd64.deb'
 fi
 
 # Motrix
