@@ -16,6 +16,15 @@ zstyle ':omz:update' mode auto
 # make git status faster
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+alias l="exa --sort Name"
+alias ll="exa --sort Name --long"
+alias la="exa --sort Name --long --all"
+alias lr="exa --sort Name --long --recurse"
+alias lra="exa --sort Name --long --recurse --all"
+alias lt="exa --sort Name --long --tree"
+alias lta="exa --sort Name --long --tree --all"
+alias ls="exa --sort Name"
+
 # git-extras gitfast git-flow git-flow-avh git-hubflow git-remote-branch
 plugins+=(git)
 # (colors)
