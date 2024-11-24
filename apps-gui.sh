@@ -28,6 +28,7 @@ FLATPAK_PKGS=(
         io.mpv.Mpv
         io.typora.Typora
         com.wps.Office
+        # com.ticktick.TickTick # 境内外软件版本不同，账户不互通
 )
 
 GNOME_EXTS=(

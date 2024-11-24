@@ -77,6 +77,12 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# homebrew
+if [ -d "/opt/homebrew" ]; then
+  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="/opt/homebrew/sbin:$PATH"
+fi
+
 # flutter
 if [ -d "$HOME/development/flutter" ]; then
   export PATH="$PATH:$HOME/development/flutter/bin"
