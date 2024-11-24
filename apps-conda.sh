@@ -1,40 +1,39 @@
 #!/bin/bash
 set -x
 
-MIRROR="https://mirrors.zju.edu.cn/anaconda/"
-FILEPATH="miniconda/Miniconda3-latest-Linux-x86_64.sh"
+CONDA_PATH=/opt/conda
+MIRROR="https://mirrors.zju.edu.cn/anaconda/miniconda/"
+# if is macos
+if [ "$(uname)" == "Darwin" ]; then
+	FILEPATH="Miniconda3-latest-MacOSX-x86_64.sh"
+elif [ "$(uname)" == "Linux" ]; then
+	FILEPATH="Miniconda3-latest-Linux-x86_64.sh"
+else
+	echo "Unsupported OS"
+	exit 1
+fi
 
 if command -v conda &>/dev/null; then
         echo "Conda already installed"
         exit 1
 fi
 
-if [ -d "$HOME/miniconda" ]; then
-        echo "Miniconda already installed"
+if [ -d "$CONDA_PATH" ]; then
+        echo "Directory $CONDA_PATH exists, please check if conda is installed"
         exit 1
 fi
 
-if [ "$EUID" -eq 0 ]; then
-        echo "Do not run as root"
+tmpfile=$(mktemp -u).sh
+if ! wget -O "$tmpfile" "$MIRROR$FILEPATH"; then
+        echo "Failed to download $MIRROR$FILEPATH"
         exit 1
 fi
 
-tmpfile=$(mktemp).sh
-if ! wget -qO "$tmpfile" "$MIRROR$FILEPATH"; then
-        echo "Failed to download $MIRROR$PATH"
-        exit 1
-fi
-
-bash "$tmpfile" -b -p "$HOME/miniconda"
+bash "$tmpfile" -b -p "$CONDA_PATH"
 
 rm "$tmpfile"
 
-if [ -f "$HOME"/.condarc ]; then
-        echo "File $HOME/.condarc exists, moving to $HOME/.condarc.bak"
-        mv "$HOME"/.condarc "$HOME"/.condarc.bak
-fi
-
-cat >> "$HOME"/.condarc <<EOF
+cat > "$CONDA_PATH"/.condarc <<EOF
 channels:
   - defaults
 show_channel_urls: true
