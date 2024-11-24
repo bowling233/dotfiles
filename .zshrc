@@ -1,13 +1,6 @@
 source ~/.bowlingrc
 zmodload zsh/zprof
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 zstyle ':omz:update' mode auto
@@ -44,20 +37,29 @@ plugins+=(zoxide)
 plugins+=(zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 # speed up by cache per day
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
+# https://medium.com/@dannysmith/little-thing-2-speeding-up-zsh-f1860390f92
+#autoload -Uz compinit
+#for dump in ~/.zcompdump(N.mh+24); do
+#  compinit
+#done
+#compinit -C
 
-alias l="exa --sort Name"
-alias ll="exa --sort Name --long"
-alias la="exa --sort Name --long --all"
-alias lr="exa --sort Name --long --recurse"
-alias lra="exa --sort Name --long --recurse --all"
-alias lt="exa --sort Name --long --tree"
-alias lta="exa --sort Name --long --tree --all"
-alias ls="exa --sort Name"
+# remove bunch of zcompdump file
+# https://www.reddit.com/r/zsh/comments/fqpidr/removing_zcompdump_file_creation/
+local -r cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
+zstyle ':completion:*' cache-path $cache_dir/.zcompcache
+compinit -C -d $cache_dir/.zcompdump
+
+if command -v exa > /dev/null; then
+	alias l="exa --sort Name"
+	alias ll="exa --sort Name --long"
+	alias la="exa --sort Name --long --all"
+	alias lr="exa --sort Name --long --recurse"
+	alias lra="exa --sort Name --long --recurse --all"
+	alias lt="exa --sort Name --long --tree"
+	alias lta="exa --sort Name --long --tree --all"
+	alias ls="exa --sort Name"
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
