@@ -3,4 +3,5 @@ export SYSTEMD_EDITOR=vim
 export LANG=en_US.UTF-8
 # for pipx
 # for rust-cargo
-export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
+# for go
+export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin"

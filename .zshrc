@@ -1,5 +1,5 @@
 source ~/.bowlingrc
-zmodload zsh/zprof
+# zmodload zsh/zprof
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -50,16 +50,16 @@ local -r cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
 zstyle ':completion:*' cache-path $cache_dir/.zcompcache
 compinit -C -d $cache_dir/.zcompdump
 
-if command -v exa > /dev/null; then
-	alias l="exa --sort Name"
-	alias ll="exa --sort Name --long"
-	alias la="exa --sort Name --long --all"
-	alias lr="exa --sort Name --long --recurse"
-	alias lra="exa --sort Name --long --recurse --all"
-	alias lt="exa --sort Name --long --tree"
-	alias lta="exa --sort Name --long --tree --all"
-	alias ls="exa --sort Name"
-fi
+#if command -v exa > /dev/null; then
+#	alias l="exa --sort Name"
+#	alias ll="exa --sort Name --long"
+#	alias la="exa --sort Name --long --all"
+#	alias lr="exa --sort Name --long --recurse"
+#	alias lra="exa --sort Name --long --recurse --all"
+#	alias lt="exa --sort Name --long --tree"
+#	alias lta="exa --sort Name --long --tree --all"
+#	alias ls="exa --sort Name"
+#fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -102,4 +102,4 @@ if [ -d "/opt/homebrew/opt/ruby" ]; then
   export PATH=$GEM_HOME/bin:$PATH
 fi
 
-zprof > /tmp/zprof
+# zprof > /tmp/zprof
