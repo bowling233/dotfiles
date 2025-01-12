@@ -17,7 +17,7 @@ if [ -f /etc/os-release ]; then
     echo "OS not supported"
     exit 1
   fi
-else 
+else
   echo "OS not supported"
   exit 1
 fi

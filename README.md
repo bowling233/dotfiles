@@ -38,6 +38,7 @@ Repository to sync my dotfiles
 
 ### Gnome
 
+- [essembeh/gnome-extensions-cli](https://github.com/essembeh/gnome-extensions-cli)
 - [Chapter 2. Setting up startup applications in GNOME | Red Hat Product Documentation](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/customizing_the_gnome_desktop_environment/setting-up-startup-applications-in-gnome_customizing-the-gnome-desktop-environment#enabling-startup-applications-for-another-user-in-gnome_setting-up-startup-applications-in-gnome)
 
 ## Scripting notes

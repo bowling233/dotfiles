@@ -29,6 +29,15 @@ FLATPAK_PKGS=(
         io.typora.Typora
         com.wps.Office
         # com.ticktick.TickTick # 境内外软件版本不同，账户不互通
+	com.parsecgaming.parsec
+        dev.lizardbyte.app.Sunshine
+        com.moonlight_stream.Moonlight
+	com.usebottles.bottles
+        org.zotero.Zotero
+	org.telegram.desktop
+	org.keepassxc.KeePassXC
+	net.werwolv.ImHex
+	com.obsproject.Studio
 )
 
 GNOME_EXTS=(
