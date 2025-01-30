@@ -2,6 +2,8 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "$SCRIPT_DIR" || exit
 
+apt install -y zsh tmux curl git fish
+
 SRC=(
         "$SCRIPT_DIR/.bowlingrc"
         "$SCRIPT_DIR/.vimrc"
@@ -25,7 +27,8 @@ DST=(
 # prerequists: zoxide, tmux, curl
 
 if [ ! -e ~/.oh-my-zsh/oh-my-zsh.sh ]; then
-        echo "Installing oh-my-zsh"
+        echo "+ Installing oh-my-zsh"
+	rm -rf ~/.oh-my-zsh
         sh -c "$(curl -fsSL https://install.ohmyz.sh)" "" --unattended
 fi
 
