@@ -4,6 +4,12 @@ set -e
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 cd "$SCRIPT_DIR" || exit
 
+# add crontab to git -C "$SCRIPT_DIR" pull
+if ! crontab -l | grep -q "git -C $SCRIPT_DIR pull"; then
+	echo "+ Adding crontab to git pull"
+	(crontab -l 2>/dev/null; echo "0 0 * * * git -C $SCRIPT_DIR pull") | crontab -
+fi
+
 PREREQ=(
 	zsh tmux curl git zoxide
 )
