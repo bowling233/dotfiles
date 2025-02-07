@@ -6,20 +6,20 @@
 set -xe
 
 if [ -x "$(command -v docker)" ]; then
-  echo "Docker is installed"
-  exit 0
+	echo "Docker is installed"
+	exit 0
 fi
 
 if [ -f /etc/os-release ]; then
-  . /etc/os-release
-  OS=$ID
-  if [ "$OS" != "ubuntu" ] && [ "$OS" != "debian" ]; then
-    echo "OS not supported"
-    exit 1
-  fi
+	. /etc/os-release
+	OS=$ID
+	if [ "$OS" != "ubuntu" ] && [ "$OS" != "debian" ]; then
+		echo "OS not supported"
+		exit 1
+	fi
 else
-  echo "OS not supported"
-  exit 1
+	echo "OS not supported"
+	exit 1
 fi
 
 pkgs=(docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc)
@@ -34,9 +34,9 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 
 # Add the repository to Apt sources:
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/$OS \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/$OS \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+	sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 sudo apt-get update
 
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin

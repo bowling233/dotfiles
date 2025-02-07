@@ -14,26 +14,26 @@ else
 fi
 
 if command -v conda &>/dev/null; then
-        echo "Conda already installed"
-        exit 1
+	echo "Conda already installed"
+	exit 1
 fi
 
 if [ -d "$CONDA_PATH" ]; then
-        echo "Directory $CONDA_PATH exists, please check if conda is installed"
-        exit 1
+	echo "Directory $CONDA_PATH exists, please check if conda is installed"
+	exit 1
 fi
 
 tmpfile=$(mktemp -u).sh
 if ! wget -O "$tmpfile" "$MIRROR$FILEPATH"; then
-        echo "Failed to download $MIRROR$FILEPATH"
-        exit 1
+	echo "Failed to download $MIRROR$FILEPATH"
+	exit 1
 fi
 
 bash "$tmpfile" -b -p "$CONDA_PATH"
 
 rm "$tmpfile"
 
-cat > "$CONDA_PATH"/.condarc <<EOF
+cat >"$CONDA_PATH"/.condarc <<EOF
 channels:
   - defaults
 show_channel_urls: true
