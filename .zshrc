@@ -2,7 +2,8 @@ source ~/.bowlingrc
 # zmodload zsh/zprof
 
 # find the path of the dotfiles
-git -C $(dirname $(readlink -f "$0")) pull
+echo $(dirname $(readlink -f ${(%):-%N}))
+git -C $(dirname $(readlink -f ${(%):-%N})) pull
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -12,7 +13,7 @@ zstyle ':omz:update' mode auto
 # make git status faster
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# omz plugin info * 
+# omz plugin info *
 # git-extras gitfast git-flow git-flow-avh git-hubflow git-remote-branch
 plugins+=(git)
 # (colors)
