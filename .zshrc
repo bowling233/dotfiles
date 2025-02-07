@@ -1,7 +1,8 @@
 source ~/.bowlingrc
 # zmodload zsh/zprof
 
-git -C ~/dotfiles pull
+# find the path of the dotfiles
+git -C $(dirname $(readlink -f "$0")) pull
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
