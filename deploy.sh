@@ -4,10 +4,27 @@ set -e
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 cd "$SCRIPT_DIR" || exit
 
+case "$OSTYPE" in
+linux-gnu*)
+	# shellcheck disable=SC1091
+	. /etc/os-release
+	;;
+darwin*)
+	ID=macos
+	;;
+*)
+	echo "Unsupported OS"
+	exit 1
+	;;
+esac
+
 # add crontab to git -C "$SCRIPT_DIR" pull
 if ! crontab -l | grep -q "git -C $SCRIPT_DIR pull"; then
 	echo "+ Adding crontab to git pull"
-	(crontab -l 2>/dev/null; echo "0 0 * * * git -C $SCRIPT_DIR pull") | crontab -
+	(
+		crontab -l 2>/dev/null
+		echo "0 0 * * * git -C $SCRIPT_DIR pull"
+	) | crontab -
 fi
 
 PREREQ=(
@@ -17,14 +34,29 @@ PREREQ=(
 for i in "${PREREQ[@]}"; do
 	if ! command -v "$i" &>/dev/null; then
 		echo "+ Installing $i"
-		sudo apt install -y "$i"
+		case "$ID" in
+		ubuntu | debian)
+			sudo apt update
+			sudo apt install -y "$i"
+			;;
+		macos)
+			brew install "$i"
+			;;
+		esac
 	fi
 done
 
-if ! getent passwd "$(whoami)" | grep -q "$(which zsh)"; then
-	echo "+ Changing default shell to zsh"
-	chsh -s "$(which zsh)"
-fi
+case "$OSTYPE" in
+linux-gnu*)
+	if ! getent passwd "$(whoami)" | grep -q "$(which zsh)"; then
+		echo "+ Changing default shell to zsh"
+		chsh -s "$(which zsh)"
+	fi
+	;;
+darwin*)
+	# zsh is default shell on macOS
+	;;
+esac
 
 # oh-my-zsh, themes, plugins
 if [ ! -e ~/.oh-my-zsh/oh-my-zsh.sh ]; then
