@@ -35,7 +35,3 @@
 [pull]
 	rebase = true
 
-[http]
-	proxy = socks5://127.0.0.1:7897
-[https]
-	proxy = socks5://127.0.0.1:7897

@@ -18,26 +18,33 @@ APT_PKGS=(
 
 alias wget='wget -q'
 
+# flatpak list --app | cut -f 2
 FLATPAK_PKGS=(
-        com.qq.QQ
         # com.microsoft.Edge
-        net.agalwood.Motrix
-        com.tencent.WeChat
-        com.qq.QQmusic
-	com.termius.Termius
-        io.mpv.Mpv
-        io.typora.Typora
-        com.wps.Office
         # com.ticktick.TickTick # 境内外软件版本不同，账户不互通
-	com.parsecgaming.parsec
-        dev.lizardbyte.app.Sunshine
-        com.moonlight_stream.Moonlight
-	com.usebottles.bottles
-        org.zotero.Zotero
-	org.telegram.desktop
-	org.keepassxc.KeePassXC
-	net.werwolv.ImHex
+	com.github.tchx84.Flatseal
+	com.moonlight_stream.Moonlight
 	com.obsproject.Studio
+	com.parsecgaming.parsec
+	com.qq.QQ
+	com.qq.QQmusic
+	com.spotify.Client
+	com.tencent.WeChat
+	com.tencent.wemeet
+	com.termius.Termius
+	com.usebottles.bottles
+	com.valvesoftware.Steam
+	com.wps.Office
+	dev.lizardbyte.app.Sunshine
+	io.mpv.Mpv
+	io.typora.Typora
+	net.agalwood.Motrix
+	net.werwolv.ImHex
+	org.blender.Blender
+	org.gimp.GIMP
+	org.keepassxc.KeePassXC
+	org.telegram.desktop
+	org.zotero.Zotero
 )
 
 GNOME_EXTS=(
