@@ -1,6 +1,8 @@
 source ~/.bowlingrc
 # zmodload zsh/zprof
 
+git -C ~/dotfiles pull
+
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 zstyle ':omz:update' mode auto
@@ -9,6 +11,7 @@ zstyle ':omz:update' mode auto
 # make git status faster
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# omz plugin info * 
 # git-extras gitfast git-flow git-flow-avh git-hubflow git-remote-branch
 plugins+=(git)
 # (colors)
@@ -23,7 +26,7 @@ plugins+=(cp)
 plugins+=(extract)
 # h hs hsi (history with grep)
 plugins+=(history)
-# ta tad tkss tl (tmux)
+# ta ts tkss tl (tmux)
 plugins+=(tmux)
 # urlencode urldecode
 plugins+=(urltools)
