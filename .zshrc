@@ -51,34 +51,43 @@ local -r cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
 zstyle ':completion:*' cache-path $cache_dir/.zcompcache
 compinit -C -d $cache_dir/.zcompdump
 
-#if command -v exa > /dev/null; then
-#	alias l="exa --sort Name"
-#	alias ll="exa --sort Name --long"
-#	alias la="exa --sort Name --long --all"
-#	alias lr="exa --sort Name --long --recurse"
-#	alias lra="exa --sort Name --long --recurse --all"
-#	alias lt="exa --sort Name --long --tree"
-#	alias lta="exa --sort Name --long --tree --all"
-#	alias ls="exa --sort Name"
-#fi
+# https://gist.github.com/AppleBoiy/04a249b6f64fd0fe1744aff759a0563b
+if command -v eza > /dev/null; then
+	alias ls='eza'
+	alias l='eza -lbF --git'
+	alias ll='eza -lbGF --git'
+	alias llm='eza -lbGd --git --sort=modified'
+	alias la='eza -lbhHigUmuSa --time-style=long-iso --git --color-scale'
+	alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale'
+
+	# specialty views
+	alias lS='eza -1'
+	alias lt='eza --tree --level=2'
+	alias l.="eza -a | grep -E '^\.'"
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("/opt/conda/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
+# conda
+if [ -d "/opt/conda" ]; then
+  CONDA_ROOT="/opt/conda"
+elif [ -d "$HOME/conda" ]; then
+  CONDA_ROOT="$HOME/conda"
+fi
+
+__conda_setup="$("$CONDA_ROOT/conda" 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
   eval "$__conda_setup"
 else
-  if [ -f "/opt/conda/etc/profile.d/conda.sh" ]; then
-    . "/opt/conda/etc/profile.d/conda.sh"
+  if [ -f "$CONDA_ROOT/etc/profile.d/conda.sh" ]; then
+    . "$CONDA_ROOT/etc/profile.d/conda.sh"
   else
-    export PATH="/opt/conda/bin:$PATH"
+    export PATH="$CONDA_ROOT/bin:$PATH"
   fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<
+unset CONDA_ROOT
 
 # homebrew
 if [ -d "/opt/homebrew" ]; then
