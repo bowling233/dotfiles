@@ -21,15 +21,12 @@
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
 function prompt_spack_env() {
-  # Run 'spack env status' and capture the output
-  local env_status=$(spack env status 2>/dev/null)
+  # 检查 SPACK_ENV 环境变量是否存在
+  if [[ -n "$SPACK_ENV" ]]; then
+    # 从路径中提取环境名称（最后一个路径部分）
+    local env_name="${SPACK_ENV##*/}"
 
-  # Check if the output contains an environment name
-  if [[ $env_status == *"In environment"* ]]; then
-    # Extract the environment name from the output
-    local env_name=$(echo $env_status | awk '{print $4}')
-
-    # Display the segment with the environment name
+    # 显示 segment
     p10k segment -i '🛠️' -f green -t "$env_name"
   fi
 }
