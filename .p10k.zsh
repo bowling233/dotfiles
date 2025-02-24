@@ -20,6 +20,20 @@
 [[ ! -o 'no_brace_expand' ]] || p10k_config_opts+=('no_brace_expand')
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
+function prompt_spack_env() {
+  # Run 'spack env status' and capture the output
+  local env_status=$(spack env status 2>/dev/null)
+
+  # Check if the output contains an environment name
+  if [[ $env_status == *"In environment"* ]]; then
+    # Extract the environment name from the output
+    local env_name=$(echo $env_status | awk '{print $4}')
+
+    # Display the segment with the environment name
+    p10k segment -i '🛠️' -f green -t "$env_name"
+  fi
+}
+
 () {
   emulate -L zsh -o extended_glob
 
@@ -47,6 +61,7 @@
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
+    spack_env               # spack environment (https://spack.io/)
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
