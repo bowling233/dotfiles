@@ -114,8 +114,8 @@ if [ -d "/opt/homebrew/opt/ruby" ]; then
 fi
 
 # spack
-if [ -d "$HOME/spack" ]; then
-  . $HOME/spack/share/spack/setup-env.sh
-fi
+#if [ -d "$HOME/spack" ]; then
+#  . $HOME/spack/share/spack/setup-env.sh
+#fi
 
 # zprof > /tmp/zprof
