@@ -30,5 +30,5 @@ let g:airline#extensions#tabline#show_tab_type = 0
 
 set number
 set relativenumber
-set textwidth=80
+" set textwidth=80
 imap jj <Esc>
