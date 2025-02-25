@@ -118,4 +118,6 @@ fi
 #  . $HOME/spack/share/spack/setup-env.sh
 #fi
 
+umask 002
+
 # zprof > /tmp/zprof
