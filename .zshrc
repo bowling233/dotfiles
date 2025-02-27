@@ -23,11 +23,11 @@ plugins+=(cp)
 # x (archive extracting)
 plugins+=(extract)
 # h hs hsi (history with grep)
-plugins+=(history)
+# plugins+=(history)
 # ta ts tkss tl (tmux)
 plugins+=(tmux)
 # urlencode urldecode
-plugins+=(urltools)
+# plugins+=(urltools)
 # gi list (fetch from gitignore.io)
 plugins+=(gitignore)
 # sc-* (systemd)
@@ -35,22 +35,12 @@ plugins+=(systemd)
 # zoxide
 plugins+=(zoxide)
 # need installation
-plugins+=(autoupdate zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
+plugins+=(zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
+# https://github.com/tamcore/autoupdate-oh-my-zsh-plugins
+# upgrade_oh_my_zsh_custom, upgrade_oh_my_zsh_all
+plugins+=(autoupdate)
 ZSH_CUSTOM_AUTOUPDATE_QUIET=true
 source $ZSH/oh-my-zsh.sh
-# speed up by cache per day
-# https://medium.com/@dannysmith/little-thing-2-speeding-up-zsh-f1860390f92
-#autoload -Uz compinit
-#for dump in ~/.zcompdump(N.mh+24); do
-#  compinit
-#done
-#compinit -C
-
-# remove bunch of zcompdump file
-# https://www.reddit.com/r/zsh/comments/fqpidr/removing_zcompdump_file_creation/
-local -r cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
-zstyle ':completion:*' cache-path $cache_dir/.zcompcache
-compinit -C -d $cache_dir/.zcompdump
 
 # https://gist.github.com/AppleBoiy/04a249b6f64fd0fe1744aff759a0563b
 if command -v eza >/dev/null; then
@@ -76,7 +66,6 @@ if [ -d "/opt/conda" ]; then
 elif [ -d "$HOME/conda" ]; then
   CONDA_ROOT="$HOME/conda"
 fi
-
 __conda_setup="$("$CONDA_ROOT/conda" 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
   eval "$__conda_setup"
@@ -112,11 +101,6 @@ if [ -d "/opt/homebrew/opt/ruby" ]; then
   export GEM_HOME=$HOME/.gem
   export PATH=$GEM_HOME/bin:$PATH
 fi
-
-# spack
-#if [ -d "$HOME/spack" ]; then
-#  . $HOME/spack/share/spack/setup-env.sh
-#fi
 
 umask 002
 

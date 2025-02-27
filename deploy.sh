@@ -4,45 +4,52 @@ set -e
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 cd "$SCRIPT_DIR" || exit
 
+. common.sh
+
+# bash provides $OSTYPE
 case "$OSTYPE" in
 linux-gnu*)
 	# shellcheck disable=SC1091
+	# os-release provides $ID
 	. /etc/os-release
 	;;
 darwin*)
 	ID=macos
 	;;
 *)
-	echo "Unsupported OS"
+	print_error "Unsupported OS"
+	exit 1
+	;;
+esac
+print_info "OS: $ID"
+
+PREREQ=(
+	zsh tmux curl git git-extras zoxide eza
+)
+
+# choose package manager
+case $ID in
+ubuntu | debian)
+	alias pkg_install="sudo apt-get update && sudo apt-get install -y"
+	;;
+macos)
+	# check if brew is installed
+	if ! command -v brew &>/dev/null; then
+		print_error "Homebrew is not installed"
+		exit 1
+	fi
+	alias pkg_install="brew install"
+	;;
+*)
+	print_error "Unsupported OS"
 	exit 1
 	;;
 esac
 
-# add crontab to git -C "$SCRIPT_DIR" pull
-if ! crontab -l | grep -q "git -C $SCRIPT_DIR pull"; then
-	echo "+ Adding crontab to git pull"
-	(
-		crontab -l 2>/dev/null
-		echo "0 0 * * * git -C $SCRIPT_DIR pull"
-	) | crontab -
-fi
-
-PREREQ=(
-	zsh tmux curl git zoxide
-)
-
 for i in "${PREREQ[@]}"; do
 	if ! command -v "$i" &>/dev/null; then
-		echo "+ Installing $i"
-		case "$ID" in
-		ubuntu | debian)
-			sudo apt update
-			sudo apt install -y "$i"
-			;;
-		macos)
-			brew install "$i"
-			;;
-		esac
+		print_info "Installing $i"
+		pkg_install "$i" || true
 	fi
 done
 
@@ -120,3 +127,12 @@ for i in "${!SRC[@]}"; do
 	echo "+ Linking ${SRC[$i]} to ${DST[$i]}"
 	ln -sf "${SRC[$i]}" "${DST[$i]}"
 done
+
+# add crontab to git -C "$SCRIPT_DIR" pull
+if ! crontab -l | grep -q "git -C $SCRIPT_DIR pull"; then
+	echo "+ Adding crontab to git pull"
+	(
+		crontab -l 2>/dev/null
+		echo "0 0 * * * git -C $SCRIPT_DIR pull"
+	) | crontab -
+fi
