@@ -24,7 +24,7 @@ esac
 print_info "OS: $ID"
 
 PREREQ=(
-	zsh tmux curl git git-extras zoxide eza
+	zsh tmux curl git git-extras zoxide eza vim
 )
 
 # choose package manager
