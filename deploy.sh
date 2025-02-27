@@ -27,7 +27,6 @@ print_info "OS: $ID"
 PREREQ=(
 	zsh tmux curl git git-extras zoxide eza vim fail2ban
 )
-
 # choose package manager
 case $ID in
 ubuntu | debian)
@@ -46,13 +45,7 @@ macos)
 	exit 1
 	;;
 esac
-
-for i in "${PREREQ[@]}"; do
-	if ! command -v "$i" &>/dev/null; then
-		print_info "Installing $i"
-		pkg_install "$i" || true
-	fi
-done
+pkg_install "${PREREQ[@]}"
 
 case "$OSTYPE" in
 linux-gnu*)
