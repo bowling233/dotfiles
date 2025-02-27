@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+shopt -s expand_aliases
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 cd "$SCRIPT_DIR" || exit
@@ -24,7 +25,7 @@ esac
 print_info "OS: $ID"
 
 PREREQ=(
-	zsh tmux curl git git-extras zoxide eza vim
+	zsh tmux curl git git-extras zoxide eza vim fail2ban
 )
 
 # choose package manager
