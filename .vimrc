@@ -32,3 +32,8 @@ set number
 set relativenumber
 " set textwidth=80
 imap jj <Esc>
+
+" from /etc/vim/vimrc
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+filetype plugin indent on
+set mouse=a            " Enable mouse usage (all modes)
