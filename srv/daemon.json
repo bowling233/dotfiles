@@ -1,0 +1,9 @@
+{
+    "proxies": {
+        "http-proxy":  "http://localhost:17888",
+        "https-proxy": "http://localhost:17888"
+    },
+    "log-opts": {
+        "tag": "container.name={{.Name}} container.id={{.ID}} container.image.name={{.ImageName}} container.runtime={{.DaemonName}}"
+    }
+}

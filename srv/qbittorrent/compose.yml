@@ -1,5 +1,5 @@
-# https://hub.docker.com/r/linuxserver/qbittorrent
 services:
+  # https://hub.docker.com/r/linuxserver/qbittorrent
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -12,8 +12,8 @@ services:
       # https://github.com/VueTorrent/VueTorrent/wiki/Installation
       - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
     volumes:
-      - ./qbittorrent/config:/config
-      - ./qbittorrent/downloads:/downloads #optional
+      - ./config:/config
+      - ./downloads:/downloads #optional
     ports:
       - 8080:8080
       - 6881:6881
