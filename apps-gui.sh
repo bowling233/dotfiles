@@ -25,15 +25,12 @@ FLATPAK_PKGS=(
 	com.github.tchx84.Flatseal
 	com.moonlight_stream.Moonlight
 	com.obsproject.Studio
-	com.parsecgaming.parsec
 	com.qq.QQ
 	com.qq.QQmusic
 	com.spotify.Client
 	com.tencent.WeChat
 	com.tencent.wemeet
 	com.termius.Termius
-	com.usebottles.bottles
-	com.valvesoftware.Steam
 	com.wps.Office
 	dev.lizardbyte.app.Sunshine
 	io.mpv.Mpv
@@ -41,7 +38,7 @@ FLATPAK_PKGS=(
 	net.agalwood.Motrix
 	net.werwolv.ImHex
 	org.blender.Blender
-	org.gimp.GIMP
+	org.kde.krita
 	org.keepassxc.KeePassXC
 	org.telegram.desktop
 	org.zotero.Zotero
