@@ -38,7 +38,7 @@ plugins+=(zoxide)
 plugins+=(zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 # https://github.com/tamcore/autoupdate-oh-my-zsh-plugins
 # upgrade_oh_my_zsh_custom, upgrade_oh_my_zsh_all
-plugins+=(autoupdate)
+# plugins+=(autoupdate)
 ZSH_CUSTOM_AUTOUPDATE_QUIET=true
 source $ZSH/oh-my-zsh.sh
 
