@@ -7,13 +7,10 @@ services:
     restart: unless-stopped
     volumes:
       - ./config.json:/etc/sing-box/config.json
+    network_mode: host
+    command: -D /var/lib/sing-box -C /etc/sing-box/ run
     # https://github.com/SagerNet/sing-box/issues/1786
     devices:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - NET_ADMIN
-    network_mode: host
-    # ports:
-    #   - 19898:19898 # controller
-    #   - 17888:17888 # mixed-in
-    command: -D /var/lib/sing-box -C /etc/sing-box/ run

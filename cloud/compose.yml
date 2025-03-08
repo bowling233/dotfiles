@@ -1,0 +1,36 @@
+# https://docs.linuxserver.io/images/docker-swag/#supported-architectures
+---
+include:
+  - codimd/compose.yml
+
+services:
+  swag:
+    image: lscr.io/linuxserver/swag:latest
+    container_name: swag
+    # cap_add:
+    #   - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - URL=bowling233.top
+      - VALIDATION=http
+      - SUBDOMAINS=cloud,codimd #optional
+      - CERTPROVIDER= #optional
+      # - DNSPLUGIN=cloudflare #optional
+      - PROPAGATION= #optional
+      #- EMAIL=zhubaolin228@gmail.com #optional
+      - ONLY_SUBDOMAINS=true #optional
+      - EXTRA_DOMAINS= #optional
+      - STAGING=false #optional
+      - DISABLE_F2B=true #optional
+      - SWAG_AUTORELOAD=true #optional
+      - SWAG_AUTORELOAD_WATCHLIST= #optional
+    volumes:
+      - ./swag-config:/config
+    ports:
+      - 443:443
+      - 80:80 #optional
+    restart: unless-stopped
+    depends_on:
+      - codimd
