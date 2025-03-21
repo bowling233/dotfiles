@@ -104,4 +104,7 @@ fi
 
 umask 002
 
+# batcat
+export BAT_THEME="Solarized (light)"
+
 # zprof > /tmp/zprof
