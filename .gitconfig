@@ -34,3 +34,4 @@
 	undo = reset --soft HEAD^
 [pull]
 	rebase = true
+
