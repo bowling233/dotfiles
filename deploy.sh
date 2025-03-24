@@ -94,7 +94,6 @@ fi
 
 # link dotfiles
 SRC=(
-	"$SCRIPT_DIR/.bowlingrc"
 	"$SCRIPT_DIR/.vimrc"
 	"$SCRIPT_DIR/.zshrc"
 	"$SCRIPT_DIR/.p10k.zsh"
@@ -102,7 +101,6 @@ SRC=(
 )
 
 DST=(
-	"$HOME/.bowlingrc"
 	"$HOME/.vimrc"
 	"$HOME/.zshrc"
 	"$HOME/.p10k.zsh"

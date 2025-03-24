@@ -1,6 +1,24 @@
-source ~/.bowlingrc
 # zmodload zsh/zprof
 
+######################
+# Universal settings #
+######################
+export EDITOR='vim'
+export SYSTEMD_EDITOR=vim
+export LANG=en_US.UTF-8
+# for pipx
+export PATH="$HOME/.local/bin:$PATH"
+# for rust-cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+# for go
+export PATH="$HOME/go/bin:$PATH"
+# goproxy.cn
+export GO111MODULE=on
+export GOPROXY=https://goproxy.cn
+
+################
+# ZSH specific #
+################
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 zstyle ':omz:update' mode auto
@@ -42,6 +60,9 @@ plugins+=(zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
 ZSH_CUSTOM_AUTOUPDATE_QUIET=true
 source $ZSH/oh-my-zsh.sh
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # https://gist.github.com/AppleBoiy/04a249b6f64fd0fe1744aff759a0563b
 if command -v eza >/dev/null; then
   alias ls='eza'
@@ -56,9 +77,6 @@ if command -v eza >/dev/null; then
   alias lt='eza --tree --level=2'
   alias l.="eza -a | grep -E '^\.'"
 fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # conda
 if [ -d "/opt/conda" ]; then
