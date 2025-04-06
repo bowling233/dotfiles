@@ -11,7 +11,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # for rust-cargo
 export PATH="$HOME/.cargo/bin:$PATH"
 # for go
-export PATH="$HOME/go/bin:$PATH"
 # goproxy.cn
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn
