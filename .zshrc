@@ -40,7 +40,7 @@ plugins+=(cp)
 # x (archive extracting)
 plugins+=(extract)
 # h hs hsi (history with grep)
-# plugins+=(history)
+plugins+=(history)
 # ta ts tkss tl (tmux)
 plugins+=(tmux)
 # urlencode urldecode
